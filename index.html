@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vértice Imóveis — Comprar e alugar imóveis</title>
+  <meta name="description" content="Imóveis para comprar e alugar, com simulador de financiamento e visita agendada pelo site. Site demonstrativo para imobiliárias.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#" class="logo" aria-label="Vértice Imóveis — início">
+        <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M4 34 L20 6 L36 34" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linejoin="miter"/>
+          <rect x="16" y="24" width="8" height="10" fill="currentColor"/>
+        </svg>
+        <span class="logo__text">Vértice</span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Navegação principal">
+        <a href="#venda" class="nav__link">Comprar</a>
+        <a href="#aluguel" class="nav__link">Alugar</a>
+        <a href="#simulador" class="nav__link">Financiamento</a>
+        <a href="#bairros" class="nav__link">Bairros</a>
+        <a href="#contato" class="nav__link">Contato</a>
+        <a href="#" class="nav__link nav__link--mobile" data-demo="Área do cliente">Área do cliente</a>
+      </nav>
+
+      <div class="header__actions">
+        <a href="#" class="fav-btn" data-demo="Imóveis curtidos" aria-label="Imóveis curtidos">
+          <svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.6-9.3-9.2C1.4 7.9 3.6 4.5 7 4.5c2 0 3.5 1.1 5 3 1.5-1.9 3-3 5-3 3.4 0 5.6 3.4 4.3 6.8-1.8 4.6-9.3 9.2-9.3 9.2z"/></svg>
+          <span class="fav-btn__count" id="favCount">0</span>
+        </a>
+        <a href="#" class="header__login" data-demo="Área do cliente">Entrar</a>
+        <a href="#anuncie" class="btn btn--solid header__cta">Anunciar imóvel</a>
+        <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio">
+      <div class="hero__bg">
+        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2200&q=80" alt="Sala de estar ampla com janelas para o jardim" fetchpriority="high">
+      </div>
+      <div class="hero__scrim"></div>
+
+      <div class="container hero__content">
+        <h1 class="hero__title" data-split>Seu próximo endereço</h1>
+        <p class="hero__sub">2.400 imóveis para comprar ou alugar, com visita agendada pelo site e contrato assinado no celular.</p>
+
+        <form class="search" id="searchForm" autocomplete="off">
+          <div class="search__tabs" role="tablist" aria-label="Tipo de negócio">
+            <button type="button" class="search__tab is-active" data-mode="venda" role="tab" aria-selected="true">Comprar</button>
+            <button type="button" class="search__tab" data-mode="aluguel" role="tab" aria-selected="false">Alugar</button>
+          </div>
+          <div class="search__bar">
+            <label class="search__field">
+              <span class="search__label">Tipo</span>
+              <select id="searchType">
+                <option value="">Todos os tipos</option>
+                <option>Apartamento</option>
+                <option>Casa</option>
+                <option>Cobertura</option>
+                <option>Comercial</option>
+              </select>
+            </label>
+            <label class="search__field search__field--grow">
+              <span class="search__label">Onde</span>
+              <input type="text" id="searchCity" placeholder="Cidade ou bairro">
+            </label>
+            <button type="submit" class="btn btn--accent search__submit">Buscar imóveis</button>
+          </div>
+        </form>
+
+        <a href="#anuncie" class="hero__link">Quer vender ou alugar o seu? Anuncie sem custo →</a>
+      </div>
+    </section>
+
+    <!-- ============ VENDA ============ -->
+    <section class="section listings" id="venda">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title" data-reveal>À venda agora</h2>
+          <div class="section__side">
+            <p class="section__lead" data-reveal>Oito imóveis que entraram esta semana, com fotos reais e documentação já conferida.</p>
+            <div class="chips" data-reveal data-group="venda">
+              <button class="chip is-active" data-filter="">Todos</button>
+              <button class="chip" data-filter="Apartamento">Apartamentos</button>
+              <button class="chip" data-filter="Casa">Casas</button>
+              <button class="chip" data-filter="Cobertura">Coberturas</button>
+            </div>
+          </div>
+        </div>
+        <p class="listings__note" id="noteVenda" hidden></p>
+        <div class="cards" id="cardsVenda"></div>
+        <div class="listings__empty" id="emptyVenda" hidden>
+          Nenhum imóvel com esses filtros. <button class="link-btn" data-reset="venda">Limpar filtros</button>
+        </div>
+        <a href="#" class="more-link" data-reveal data-demo="Todos os imóveis à venda">Ver os 1.640 imóveis à venda →</a>
+      </div>
+    </section>
+
+    <!-- ============ DIFERENCIAIS ============ -->
+    <section class="feature">
+      <div class="feature__media" data-reveal>
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80" alt="Sala integrada com cozinha, piso de madeira clara" loading="lazy" data-parallax="0.08">
+      </div>
+      <div class="feature__text">
+        <h2 class="section__title" data-reveal>Menos papel, mais visita</h2>
+        <p class="feature__lead" data-reveal>A parte chata a gente resolve pela tela. Você só sai de casa para conhecer o imóvel.</p>
+        <dl class="benefits" data-stagger>
+          <div data-reveal>
+            <dt>Imóvel conferido antes de ir ao ar</dt>
+            <dd>Vistoria, matrícula e débitos checados. Se tem pendência, o anúncio não entra.</dd>
+          </div>
+          <div data-reveal>
+            <dt>Visita marcada em um clique</dt>
+            <dd>Escolha dia e horário na página do imóvel e receba a confirmação no WhatsApp.</dd>
+          </div>
+          <div data-reveal>
+            <dt>Contrato assinado no celular</dt>
+            <dd>Assinatura eletrônica, seguro-fiança no lugar do fiador e nenhuma fila em cartório.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ ALUGUEL ============ -->
+    <section class="section listings listings--field" id="aluguel">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title" data-reveal>Para alugar este mês</h2>
+          <div class="section__side">
+            <p class="section__lead" data-reveal>Prontos para entrar, a maioria sem fiador. O valor mostrado já é o aluguel mensal.</p>
+            <div class="chips" data-reveal data-group="aluguel">
+              <button class="chip is-active" data-filter="">Todos</button>
+              <button class="chip" data-filter="Apartamento">Apartamentos</button>
+              <button class="chip" data-filter="Casa">Casas</button>
+              <button class="chip" data-filter="Comercial">Comercial</button>
+            </div>
+          </div>
+        </div>
+        <div class="cards" id="cardsAluguel"></div>
+        <div class="listings__empty" id="emptyAluguel" hidden>
+          Nenhum imóvel com esses filtros. <button class="link-btn" data-reset="aluguel">Limpar filtros</button>
+        </div>
+        <a href="#" class="more-link" data-reveal data-demo="Todos os imóveis para alugar">Ver os 760 imóveis para alugar →</a>
+      </div>
+    </section>
+
+    <!-- ============ SIMULADOR ============ -->
+    <section class="sim" id="simulador">
+      <div class="container sim__grid">
+        <div class="sim__intro">
+          <h2 class="section__title" data-reveal>Quanto fica a parcela?</h2>
+          <p class="sim__lead" data-reveal>Mexa nos valores e veja a parcela na hora. Depois, mostramos só os imóveis que cabem no seu bolso.</p>
+
+          <div class="sim__controls" data-stagger>
+            <label class="range" data-reveal>
+              <span class="range__top"><span>Valor do imóvel</span><output id="outValue"></output></span>
+              <input type="range" id="simValue" min="150000" max="4500000" step="10000" value="800000">
+            </label>
+            <label class="range" data-reveal>
+              <span class="range__top"><span>Entrada</span><output id="outDown"></output></span>
+              <input type="range" id="simDown" min="20" max="80" step="5" value="30">
+            </label>
+            <label class="range" data-reveal>
+              <span class="range__top"><span>Prazo</span><output id="outYears"></output></span>
+              <input type="range" id="simYears" min="5" max="35" step="1" value="30">
+            </label>
+          </div>
+        </div>
+
+        <div class="sim__result" data-reveal>
+          <p class="sim__label">Parcela estimada</p>
+          <p class="sim__big"><span id="simPmt">R$ 0</span><small>/mês</small></p>
+          <dl class="sim__facts">
+            <div><dt>Valor financiado</dt><dd id="simLoan"></dd></div>
+            <div><dt>Renda familiar sugerida</dt><dd id="simIncome"></dd></div>
+            <div><dt>Juros</dt><dd>11,49% ao ano</dd></div>
+            <div><dt>Total pago ao banco</dt><dd id="simTotal"></dd></div>
+          </dl>
+          <button class="btn btn--accent btn--block" id="simApply">Ver imóveis até R$ 800 mil</button>
+          <p class="sim__note">Tabela Price, sem seguros e taxas. Simulação apenas ilustrativa.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BAIRROS ============ -->
+    <section class="section places" id="bairros">
+      <div class="container">
+        <div class="section__head">
+          <h2 class="section__title" data-reveal>Procure pelo bairro</h2>
+          <p class="section__lead" data-reveal>Os endereços mais buscados no último mês. Passe o mouse para ver como é a região.</p>
+        </div>
+        <ul class="places__list" id="placesList"></ul>
+      </div>
+      <div class="places__preview" id="placesPreview" aria-hidden="true"><img alt=""></div>
+    </section>
+
+    <!-- ============ COMO FUNCIONA ============ -->
+    <section class="section steps" id="como-funciona">
+      <div class="container">
+        <h2 class="section__title" data-reveal>Da busca às chaves</h2>
+        <ol class="steps__list" data-stagger>
+          <li class="step" data-reveal>
+            <h3>Busque</h3>
+            <p>Filtre por bairro, valor e tipo. Curta os que gostar para comparar depois, lado a lado.</p>
+          </li>
+          <li class="step" data-reveal>
+            <h3>Visite</h3>
+            <p>Presencial ou por vídeo, no horário que for melhor. Um corretor da região acompanha.</p>
+          </li>
+          <li class="step" data-reveal>
+            <h3>Negocie</h3>
+            <p>Mande a proposta pelo site e acompanhe cada resposta do proprietário em tempo real.</p>
+          </li>
+          <li class="step" data-reveal>
+            <h3>Mude-se</h3>
+            <p>Contrato digital, vistoria de entrada agendada e as chaves entregues no dia combinado.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ DEPOIMENTOS ============ -->
+    <section class="section testimonials">
+      <div class="container testimonials__grid">
+        <div class="testimonials__photo" data-reveal>
+          <img id="tPhoto" src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1000&q=80" alt="" loading="lazy">
+        </div>
+        <div class="testimonials__body">
+          <h2 class="section__title" data-reveal>Quem já se mudou</h2>
+          <div class="tslider" data-reveal>
+            <div class="tslider__track" id="tTrack">
+              <figure class="tcard" data-photo="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1000&q=80">
+                <blockquote>“Visitamos quatro apartamentos num sábado, tudo marcado pelo site. Duas semanas depois assinamos o contrato pelo celular.”</blockquote>
+                <figcaption><strong>Mariana Costa</strong>, comprou um apartamento em Pinheiros</figcaption>
+              </figure>
+              <figure class="tcard" data-photo="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=80">
+                <blockquote>“Anunciei a casa numa segunda e na sexta tinha três propostas. Fotos, documentos e negociação ficaram com eles.”</blockquote>
+                <figcaption><strong>Ricardo Almeida</strong>, vendeu uma casa em Florianópolis</figcaption>
+              </figure>
+              <figure class="tcard" data-photo="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1000&q=80">
+                <blockquote>“Precisava de uma sala comercial rápido e sem fiador. O seguro-fiança foi aprovado no mesmo dia.”</blockquote>
+                <figcaption><strong>Juliana Ferreira</strong>, alugou uma sala no Centro</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="testimonials__nav" data-reveal>
+            <button class="sq-btn" id="tPrev" aria-label="Depoimento anterior">←</button>
+            <button class="sq-btn" id="tNext" aria-label="Próximo depoimento">→</button>
+            <span class="testimonials__counter"><span id="tCurrent">1</span> de <span id="tTotal">3</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA PROPRIETÁRIO ============ -->
+    <section class="cta" id="anuncie">
+      <div class="cta__bg">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=80" alt="" loading="lazy" data-parallax="0.12">
+      </div>
+      <div class="container cta__inner">
+        <div class="cta__text">
+          <h2 data-reveal>Tem um imóvel para anunciar?</h2>
+          <p class="cta__lead" data-reveal>A gente fotografa, avalia o preço com dados de mercado e publica nos maiores portais do país. Você só paga quando fechar negócio.</p>
+          <ul class="cta__list" data-stagger>
+            <li data-reveal><strong>Fotos profissionais</strong> feitas por nós, sem custo</li>
+            <li data-reveal><strong>Preço sugerido</strong> a partir de vendas reais na região</li>
+            <li data-reveal><strong>Gestão do aluguel</strong> com repasse garantido todo mês</li>
+          </ul>
+        </div>
+
+        <form class="cta__form" id="ownerForm" data-reveal>
+          <h3>Anuncie sem custo</h3>
+          <p>Um consultor responde em até 1 hora útil.</p>
+          <label class="field"><span>Seu nome</span><input type="text" required></label>
+          <label class="field"><span>WhatsApp</span><input type="tel" required placeholder="(00) 00000-0000"></label>
+          <div class="field-row">
+            <label class="field">
+              <span>Quero</span>
+              <select required>
+                <option>Vender</option>
+                <option>Alugar</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Tipo</span>
+              <select required>
+                <option>Apartamento</option>
+                <option>Casa</option>
+                <option>Comercial</option>
+                <option>Terreno</option>
+              </select>
+            </label>
+          </div>
+          <button type="submit" class="btn btn--accent btn--block">Quero anunciar</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" id="contato">
+    <div class="container">
+      <div class="footer__top">
+        <p class="footer__call" data-reveal>Vamos achar o seu próximo endereço?</p>
+        <a href="#" class="btn btn--accent btn--lg" data-reveal data-demo="Falar com um consultor">Falar com um consultor</a>
+      </div>
+
+      <div class="footer__grid">
+        <div>
+          <h3>Navegue</h3>
+          <a href="#venda">Comprar</a>
+          <a href="#aluguel">Alugar</a>
+          <a href="#simulador">Simular financiamento</a>
+          <a href="#anuncie">Anunciar</a>
+        </div>
+        <div>
+          <h3>Clientes</h3>
+          <a href="#" data-demo="Área do locatário">Área do locatário</a>
+          <a href="#" data-demo="Área do proprietário">Área do proprietário</a>
+          <a href="#" data-demo="2ª via de boleto">2ª via de boleto</a>
+          <a href="#" data-demo="Dúvidas frequentes">Dúvidas frequentes</a>
+        </div>
+        <div>
+          <h3>Atendimento</h3>
+          <p>Av. Exemplo, 1000, sala 101<br>Centro, Sua Cidade</p>
+          <a href="#" data-demo="Ligar">(00) 0000-0000</a>
+          <a href="#" data-demo="Enviar e-mail">contato@seusite.com.br</a>
+          <p class="footer__muted">Segunda a sexta, das 8h às 18h</p>
+        </div>
+        <div>
+          <h3>Redes</h3>
+          <a href="#" data-demo="Instagram">Instagram</a>
+          <a href="#" data-demo="YouTube">YouTube</a>
+          <a href="#" data-demo="LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+
+      <p class="footer__name" aria-hidden="true">Vértice</p>
+
+      <div class="footer__bottom">
+        <span>© <span id="year"></span> Vértice Imóveis · CRECI 00000-J</span>
+        <span>Site demonstrativo com dados fictícios. Fotos: Unsplash.</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp -->
+  <a href="#" class="whats" data-demo="WhatsApp" aria-label="Fale no WhatsApp">
+    <svg viewBox="0 0 32 32"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.7 8.7 0 0 1-4.3-3.7c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.8.9 3.8.8.6-.1 1.9-.8 2.2-1.5s.3-1.4.2-1.5-.3-.2-.6-.3z"/></svg>
+  </a>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
